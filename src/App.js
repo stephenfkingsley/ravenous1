@@ -16,7 +16,7 @@ rating: 4.5,
 reviewCount: 90
 }
 
-let businesses = ['business1', 'business2', 'business3', 'business4', 'business5', 'business6']
+const businesses = ['business1', 'business2', 'business3', 'business4', 'business5', 'business6']
 
 class App extends Component {
   render() {
