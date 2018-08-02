@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import './SearchBar.css'
 
-const sortByOptions = {
- 'Best Match': 'best_match',
- 'Highest Rated' : 'rating',
- 'Most Reviewed'  : 'review_count',
-}
-
 class SearchBar extends Component {
   constructor(props){
     super(props)
@@ -18,44 +12,32 @@ class SearchBar extends Component {
     this.handleTermChange = this.handleTermChange.bind(this)
     this.handleLocationChange = this.handleLocationChange.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.handleSortByChange = this.handleSortByChange.bind(this)
+
+    this.sortByOptions = {
+    'Best Match': 'best_match',
+    'Highest Rated' : 'rating',
+    'Most Reviewed'  : 'review_count',
+   }
   }
-  renderSortByOptions() {
-    let sortByOption = ''
-   return Object.keys(sortByOptions).map(sortByOption => {
-     let sortByOptionValue = sortByOptions[sortByOption]
-     return(
-         <li className={this.getSortByClass(sortByOptionValue)}
-             key={sortByOptionValue}
-             onClick={this.handleSortByChange.bind(this, sortByOptionValue)}>
-             {sortByOption}
-        </li>
-     )})
- }
 
  getSortByClass(sortByOption) {
    if(this.state.sortBy === sortByOption) {
      return('active')
-   } else{
-     return('')
    }
+     return ''
  }
 
  handleSortByChange(sortByOption) {
-   this.setState(
-    { sortBy: sortByOption }
-   )
+   this.setState({ sortBy: sortByOption })
  }
 
  handleTermChange(event){
-   this.setState(
-     { term: event.target.value}
-   )
+   this.setState({ term: event.target.value})
  }
 
  handleLocationChange(event){
-   this.setState(
-     { location: event.target.value}
-   )
+   this.setState({ location: event.target.value})
  }
 
  handleSearch(event){
@@ -63,8 +45,19 @@ class SearchBar extends Component {
    event.preventDefault()
  }
 
-  render(){
-    return(
+ renderSortByOptions() {
+  return Object.keys(this.sortByOptions).map(sortByOption => {
+    let sortByOptionValue = this.sortByOptions[sortByOption]
+    return(<li className={this.getSortByClass(sortByOptionValue)}
+              key={sortByOptionValue}
+              onClick={this.handleSortByChange}>
+              {sortByOption}
+          </li>)
+     })
+}
+
+  render() {
+    return (
 <div className="SearchBar">
   <div className="SearchBar-sort-options">
     <ul>
@@ -81,8 +74,6 @@ class SearchBar extends Component {
 </div>
     )
   }
-
-
 }
 
 export default SearchBar
